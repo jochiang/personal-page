@@ -82,18 +82,16 @@ const StartMenu = (() => {
         const content = `
             <div class="window-content">
                 <h2>Contact</h2>
-                <p>Get in touch with me:</p>
+                <p>Get in touch with me on GitHub:</p>
                 <ul class="tree-view">
-                    <li>📧 <strong>Email:</strong> Available on GitHub profile</li>
                     <li>🐙 <strong>GitHub:</strong> <a href="https://github.com/jochiang" target="_blank">@jochiang</a></li>
-                    <li>💼 <strong>LinkedIn:</strong> Connect on LinkedIn</li>
                 </ul>
-                <p style="margin-top: 20px;">Looking forward to hearing from you!</p>
+                <p style="margin-top: 20px;">Feel free to open an issue or reach out!</p>
             </div>
         `;
         WindowManager.createWindow('contact', 'Contact', content, {
-            width: 450,
-            height: 300
+            width: 400,
+            height: 250
         });
     }
 
