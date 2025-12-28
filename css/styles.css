@@ -1,0 +1,338 @@
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Tahoma", "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Desktop */
+#desktop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 40px);
+    background: linear-gradient(180deg, #5a8bdb 0%, #3a6bbb 100%);
+    background-image: url('../assets/wallpaper.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* Taskbar */
+#taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(180deg, #245edb 0%, #1941a5 100%);
+    border-top: 1px solid #0831d9;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+#start-button {
+    height: 32px;
+    padding: 0 12px;
+    background: linear-gradient(180deg, #3bdb3b 0%, #28a428 100%);
+    border: 1px outset #fff;
+    border-radius: 0 8px 8px 0;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#start-button:hover {
+    background: linear-gradient(180deg, #4beb4b 0%, #38b438 100%);
+}
+
+#start-button:active,
+#start-button.active {
+    border: 1px inset #fff;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#taskbar-windows {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    padding: 0 8px;
+    overflow-x: auto;
+}
+
+.taskbar-window-button {
+    height: 32px;
+    min-width: 120px;
+    max-width: 200px;
+    padding: 0 8px;
+    background: linear-gradient(180deg, #4889d6 0%, #2663b0 50%, #1d4f8c 100%) !important;
+    border: 1px solid #1a4a82 !important;
+    border-top-color: #6ba4e0 !important;
+    border-left-color: #5a9ad8 !important;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.taskbar-window-button:hover {
+    background: linear-gradient(180deg, #5a9feb 0%, #3a7fcb 100%) !important;
+}
+
+.taskbar-window-button.active {
+    border: 1px inset #888 !important;
+    background: linear-gradient(180deg, #1e5aa8 0%, #0f3a78 100%) !important;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+#taskbar-tray {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-left: 1px solid #1941a5;
+}
+
+#clock {
+    color: white;
+    font-size: 12px;
+    padding: 0 8px;
+}
+
+/* Start Menu */
+#start-menu {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    width: 280px;
+    max-height: 400px;
+    background: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+#start-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.start-menu-header {
+    background: linear-gradient(90deg, #1941a5 0%, #3a8fdb 100%);
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.start-menu-body {
+    padding: 0 !important;
+}
+
+.start-menu-items {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+}
+
+.start-menu-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.start-menu-item:hover {
+    background: #3a8fdb;
+    color: white;
+}
+
+/* Windows */
+.xp-window {
+    position: absolute;
+    min-width: 300px;
+    min-height: 200px;
+    max-width: 90vw;
+    max-height: 80vh;
+    background: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    display: none;
+    flex-direction: column;
+}
+
+.xp-window.visible {
+    display: flex;
+}
+
+.xp-window.minimized {
+    display: none;
+}
+
+.xp-window .title-bar {
+    cursor: move;
+    user-select: none;
+}
+
+.xp-window .window-body {
+    flex: 1;
+    overflow: auto;
+    padding: 8px;
+}
+
+.xp-window .title-bar-controls button {
+    cursor: pointer;
+}
+
+/* Resize handle */
+.resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    cursor: nwse-resize;
+    background: linear-gradient(135deg, transparent 0%, transparent 50%, #000 50%, #000 51%, transparent 51%);
+    opacity: 0.3;
+}
+
+.resize-handle:hover {
+    opacity: 0.6;
+}
+
+/* GitHub Repos Window */
+.repos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.repo-item {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #f0f0f0;
+    transition: background 0.2s;
+}
+
+.repo-item:hover {
+    background: #e0e0e0;
+    border-color: #3a8fdb;
+}
+
+.repo-name {
+    font-weight: bold;
+    color: #000080;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.repo-description {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.repo-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: #666;
+}
+
+.repo-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.loading::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* Error state */
+.error {
+    padding: 20px;
+    color: #c00;
+    background: #fee;
+    border: 1px solid #c00;
+    border-radius: 4px;
+}
+
+/* About/Contact Windows */
+.window-content {
+    line-height: 1.6;
+}
+
+.window-content h2 {
+    color: #000080;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.window-content p {
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.window-content a {
+    color: #000080;
+    text-decoration: underline;
+}
+
+.window-content a:hover {
+    color: #3a8fdb;
+}
+
+/* Scrollbar styling for XP feel */
+.window-body::-webkit-scrollbar {
+    width: 16px;
+}
+
+.window-body::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+.window-body::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 1px solid #808080;
+}
+
+.window-body::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}

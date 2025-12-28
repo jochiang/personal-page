@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Page - Windows XP</title>
+
+    <!-- XP.css from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Desktop -->
+    <div id="desktop">
+        <!-- Windows will be dynamically created here -->
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">Start Menu</div>
+        </div>
+        <div class="window-body start-menu-body">
+            <div class="start-menu-header">
+                <strong>jochiang</strong>
+            </div>
+            <ul class="tree-view start-menu-items">
+                <li class="start-menu-item" data-action="repos">
+                    <span>📁 My GitHub Repos</span>
+                </li>
+                <li class="start-menu-item" data-action="about">
+                    <span>👤 About Me</span>
+                </li>
+                <li class="start-menu-item" data-action="contact">
+                    <span>📧 Contact</span>
+                </li>
+                <li class="start-menu-item" data-action="projects">
+                    <span>💼 Projects</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div id="taskbar">
+        <button id="start-button" class="taskbar-button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ctext x='0' y='15' font-size='16'%3E🪟%3C/text%3E%3C/svg%3E" alt="Start" style="vertical-align: middle;">
+            <span style="margin-left: 4px;">Start</span>
+        </button>
+        <div id="taskbar-windows"></div>
+        <div id="taskbar-tray">
+            <div id="clock"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/windowManager.js"></script>
+    <script src="js/taskbar.js"></script>
+    <script src="js/startMenu.js"></script>
+    <script src="js/github.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
