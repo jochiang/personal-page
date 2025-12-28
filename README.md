@@ -28,7 +28,7 @@ A retro Windows XP-themed personal portfolio website with draggable windows, ani
 3. Set source to "Deploy from a branch"
 4. Select `main` branch and `/ (root)` folder
 5. Click Save
-6. Your site will be available at: `https://jochiang.github.io/[repo-name]/`
+6. Your site will be available at: `https://jochiang.github.io/personal-page/`
 
 ## File Structure
 
