@@ -2,9 +2,47 @@
 
 const GitHub = (() => {
     const API_BASE = 'https://api.github.com';
+    const CACHE_KEY = 'github_repos_cache';
+    const CACHE_TTL = 10 * 60 * 1000; // 10 minutes in ms
+
+    // Get cached repos if still fresh
+    function getCachedRepos(username) {
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (!cached) return null;
+
+            const { data, timestamp, user } = JSON.parse(cached);
+            const age = Date.now() - timestamp;
+
+            if (user === username && age < CACHE_TTL) {
+                console.log(`Using cached repos (${Math.round(age / 1000)}s old)`);
+                return data;
+            }
+        } catch (e) {
+            console.warn('Cache read error:', e);
+        }
+        return null;
+    }
+
+    // Save repos to cache
+    function cacheRepos(username, repos) {
+        try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+                data: repos,
+                timestamp: Date.now(),
+                user: username
+            }));
+        } catch (e) {
+            console.warn('Cache write error:', e);
+        }
+    }
 
     // Fetch repositories for a user
     async function fetchRepos(username) {
+        // Check cache first
+        const cached = getCachedRepos(username);
+        if (cached) return cached;
+
         try {
             const response = await fetch(`${API_BASE}/users/${username}/repos?sort=updated&per_page=100`);
 
@@ -13,6 +51,7 @@ const GitHub = (() => {
             }
 
             const repos = await response.json();
+            cacheRepos(username, repos);
             return repos;
         } catch (error) {
             console.error('Error fetching repos:', error);
